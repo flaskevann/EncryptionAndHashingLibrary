@@ -7,7 +7,7 @@ namespace EncryptionAndHashingLibrary
 {
     public class HashWrapper
     {
-        public static byte[] CreateHash(byte[] data)
+        public static byte[] CreateSHA2Hash(byte[] data)
         {
             using (SHA256 sha256Hash = SHA256.Create())
             {
