@@ -8,7 +8,7 @@ namespace EncryptionAndHashingLibrary.Tests
     public class AesEncryptionTests
     {
         [Fact]
-        public void CbcEncryptionAndDecryptionTest()
+        public void EncryptionAndDecryptionTestCBC()
         {
             List<string> cipherTexts = new List<string>();
 
@@ -17,8 +17,8 @@ namespace EncryptionAndHashingLibrary.Tests
 
             for (int e = 0; e < 10; e++)
             {
-                byte[] cipherText = AesEncryptionWrapper.Encrypt(Encoding.UTF8.GetBytes(testText), key, out byte[] iv);
-                byte[] decryptedData = AesEncryptionWrapper.Decrypt(cipherText, key, iv);
+                byte[] cipherText = AesEncryptionWrapper.EncryptWithCBC(Encoding.UTF8.GetBytes(testText), key);
+                byte[] decryptedData = AesEncryptionWrapper.DecryptForCBC(cipherText, key);
 
                 Assert.Equal(testText, Encoding.UTF8.GetString(decryptedData));
 
@@ -29,7 +29,7 @@ namespace EncryptionAndHashingLibrary.Tests
         }
 
         [Fact]
-        public void GcmEncryptionAndDecryptionTest()
+        public void EncryptionAndDecryptionTestGCM()
         {
             List<string> cipherTexts = new List<string>();
 
@@ -38,8 +38,8 @@ namespace EncryptionAndHashingLibrary.Tests
 
             for (int e = 0; e < 10; e++)
             {
-                byte[] result = AesEncryptionWrapper.Encrypt(Encoding.UTF8.GetBytes(testText), key);
-                byte[] decryptedData = AesEncryptionWrapper.Decrypt(result, key);
+                byte[] result = AesEncryptionWrapper.EncryptWithGCM(Encoding.UTF8.GetBytes(testText), key);
+                byte[] decryptedData = AesEncryptionWrapper.DecryptForGCM(result, key);
 
                 Assert.Equal(testText, Encoding.UTF8.GetString(decryptedData));
 

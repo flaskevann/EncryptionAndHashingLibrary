@@ -19,9 +19,10 @@ namespace EncryptionAndHashingLibrary
         }
 
         // CBC mode
-        public static byte[] Encrypt(byte[] data, byte[] key, out byte[] iv)
+        public static byte[] EncryptWithCBC(byte[] data, byte[] key)
         {
-            iv = CreateRandomBytes(CBC_IV_SIZE);
+            byte[] iv = CreateRandomBytes(CBC_IV_SIZE);
+            byte[] cipherText;
 
             using (Aes aes = Aes.Create())
             {
@@ -38,14 +39,20 @@ namespace EncryptionAndHashingLibrary
                         cryptoStream.Write(data, 0, data.Length);
                         cryptoStream.FlushFinalBlock();
 
-                        return ms.ToArray();
+                        cipherText = ms.ToArray();
                     }
                 }
             }
+
+            byte[] completeCipherText = new byte[iv.Length + cipherText.Length];
+            Array.Copy(iv, completeCipherText, iv.Length);
+            Array.Copy(cipherText, 0, completeCipherText, iv.Length, cipherText.Length);
+
+            return completeCipherText;
         }
 
         // GCM mode (preferred)
-        public static byte[] Encrypt(byte[] data, byte[] key)
+        public static byte[] EncryptWithGCM(byte[] data, byte[] key)
         {
             byte[] tag = new byte[GCM_KEY_SIZE / 8];
             byte[] nonce = CreateRandomBytes(GCM_NONCE_SIZE);
@@ -64,8 +71,15 @@ namespace EncryptionAndHashingLibrary
             }
         }
 
-        public static byte[] Decrypt(byte[] cipherText, byte[] key, byte[] iv)
+        public static byte[] DecryptForCBC(byte[] completeCipherText, byte[] key)
         {
+            byte[] iv = new byte[CBC_IV_SIZE / 8];
+            byte[] cipherText = new byte[completeCipherText.Length - iv.Length];
+            byte[] data;
+
+            Array.Copy(completeCipherText, iv, iv.Length);
+            Array.Copy(completeCipherText, iv.Length, cipherText, 0, cipherText.Length);
+
             using (Aes aes = Aes.Create())
             {
                 aes.Mode = CipherMode.CBC;
@@ -81,13 +95,15 @@ namespace EncryptionAndHashingLibrary
                         cryptoStream.Write(cipherText, 0, cipherText.Length);
                         cryptoStream.FlushFinalBlock();
 
-                        return ms.ToArray();
+                        data = ms.ToArray();
                     }
                 }
             }
+
+            return data;
         }
 
-        public static byte[] Decrypt(byte[] completeCipherText, byte[] key)
+        public static byte[] DecryptForGCM(byte[] completeCipherText, byte[] key)
         {
             byte[] tag = new byte[GCM_KEY_SIZE / 8];
             byte[] nonce = new byte[GCM_NONCE_SIZE / 8];
