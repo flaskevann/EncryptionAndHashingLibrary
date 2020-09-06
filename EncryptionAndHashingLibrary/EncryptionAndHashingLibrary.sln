@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30420.98
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptionAndHashingLibrary", "EncryptionAndHashingLibrary.csproj", "{812A6349-36CA-40CF-91C0-E309A1E4B5A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptionAndHashingLibrary.Tests", "..\EncryptionAndHashingLibrary.Tests\EncryptionAndHashingLibrary.Tests.csproj", "{0BCF7792-E87A-49A0-9C7D-F18FDFBCC864}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{812A6349-36CA-40CF-91C0-E309A1E4B5A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{812A6349-36CA-40CF-91C0-E309A1E4B5A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{812A6349-36CA-40CF-91C0-E309A1E4B5A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{812A6349-36CA-40CF-91C0-E309A1E4B5A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BCF7792-E87A-49A0-9C7D-F18FDFBCC864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BCF7792-E87A-49A0-9C7D-F18FDFBCC864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BCF7792-E87A-49A0-9C7D-F18FDFBCC864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BCF7792-E87A-49A0-9C7D-F18FDFBCC864}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6533E8DC-AC5B-4F94-950E-80BED9854859}
+	EndGlobalSection
+EndGlobal
