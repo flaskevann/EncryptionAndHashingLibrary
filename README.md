@@ -2,7 +2,7 @@
 
 A NET Core library for collecting and giving easy access to useful encryption and hashing functionality.
 
-Can easily be copied or imported into any kind of NET project and taken full advantage of.
+Can easily be copied or imported into any kind of NET project and be taken full advantage of.
 
 ## Content
 
